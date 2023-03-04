@@ -46,12 +46,100 @@ figma.ui.onmessage = async (pluginMessage) => {
   templateName.characters = pluginMessage.name;
   templateUsername.characters = pluginMessage.username;
   templateDescription.characters = pluginMessage.description;
+  
+  
+  // nodes.push(newpost);
 
-  nodes.push(newpost);
+  // figma.viewport.scrollAndZoomIntoView(nodes);
 
-  figma.viewport.scrollAndZoomIntoView(nodes);
 
-  pluginMessage['image'] = newpost
+  // pluginMessage['file'] = newpost
+
+
+  // const polygon = figma.createPolygon()
+  // polygon.pointCount = 6
+  // polygon.fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 0 } }]
+
+  // Export a 2x resolution PNG of the node
+  const bytes = await newpost.exportAsync({
+    format: 'PNG',
+    constraint: { type: 'SCALE', value: 2 },
+  })
+
+  // Add the image onto the canvas as an image fill in a frame
+  const image = figma.createImage(bytes)
+  const frame = figma.createFrame()
+  frame.x = 200
+  frame.resize(200, 230)
+  frame.fills = [{
+    imageHash: image.hash,
+    scaleMode: "FILL",
+    scalingFactor: 1,
+    type: "IMAGE",
+  }]
+
+
+  for (const paint of frame.fills) {
+    if (paint.type === 'IMAGE') {
+      const image = figma.getImageByHash(paint.imageHash!);
+      // const bytes = await image.getBytesAsync()
+    }
+  }
+    
+  // pluginMessage['inputFile'] = 'name.csv'
+  // pluginMessage['mailAttachment'] = image
+
+  // Set up the export settings
+  // const exportSettings = [
+  //   {
+  //     format: 'PNG',
+  //     constraint: {
+  //       type: 'SCALE',
+  //       value: 2,
+  //     },
+  //   },
+  // ];
+
+  // Get the selected layer
+  // const selectedLayer = figma.currentPage.selection[0];
+
+  // Export the layer as an image
+  // selectedLayer.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 2 } })
+  //   .then((imageData) => {
+  //     // Create a new file
+  //     const file = new Uint8Array(imageData);
+
+  //     // Save the file to the user's computer
+  //     const fileName = `${selectedLayer.name}.png`;
+  //     console.log(fileName)
+
+      // const blob = new Blob([file], { type: 'image/png' });
+
+      // const url = URL.createObjectURL(blob);
+      // const a = document.createElement('a');
+      // a.href = url;
+      // a.download = fileName;
+      // document.body.appendChild(a);
+      // a.click();
+      // document.body.removeChild(a);
+    // });
+
+
+  // await fetch('https://agarjun007.pythonanywhere.com/api/send-mail', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(pluginMessage)
+  // })
+  // .then(response => response.json())
+  // .then(data => console.log(data))
+  // .catch(error => console.error(error))
+
+
+  
+
+
 
 
 
@@ -59,3 +147,4 @@ figma.ui.onmessage = async (pluginMessage) => {
 
   // figma.closePlugin()
 }
+

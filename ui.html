@@ -17,17 +17,25 @@ div{
 </style>
 
 
+
+
+
 <div>
-  <!-- <label for="subject">Subject</label>
+  <label for="fromMail">From</label>
+  <input class="input__field" id="fromMailField" type="text">
+
+  <label for="password">Password</label>
+  <input class="input__field" id="passwordField" type="text">
+
+  <label for="subject">Subject</label>
   <input class="input__field" id="subjectField" type="text">
 
-  <label for="body">Body</label>
-  <input class="textarea" id="bodyField" type="textarea" rows="2"> -->
+  <label for="content">Body</label>
+  <input class="textarea" id="contentField" type="textarea" rows="2">
 
   <div>
     <label for="username">Username</label>
     <input class="input__field" type="text" value="username" id="username">
-
 
     <label for="name">Name</label>
     <input class="input__field" type="text" value="display name" id="name">
@@ -63,14 +71,12 @@ div{
 
 <script>
   document.getElementById('submitPost').onclick = ()=>{
-    // const subjectField = document.getElementById('subjectField').value;
-    // const bodyField = document.getElementById('bodyField').value
+    const fromMail = document.getElementById('fromMailField').value
+    const password = document.getElementById('passwordField').value
+    const subject = document.getElementById('subjectField').value;
+    const content = document.getElementById('contentField').value
 
-    // datas = {
-    //   subjectField,
-    //   bodyField,
 
-    // }
     const name = document.getElementById("name").value;
     const username = document.getElementById("username").value;
     const description = document.getElementById("description").value;
@@ -82,7 +88,11 @@ div{
       username,
       description,
       darkModeState,
-      imageVariant
+      imageVariant,
+      fromMail,
+      password,
+      subject,
+      content,
     }
 
     parent.postMessage({pluginMessage:datas},"*");
