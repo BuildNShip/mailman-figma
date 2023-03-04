@@ -1,6 +1,6 @@
 {
-  "name": "mailman-plugin-figma",
-  "id": "1213739599880150692",
+  "name": "mailman-figma-plugin",
+  "id": "1213807275367258866",
   "api": "1.0.0",
   "main": "code.js",
   "capabilities": [],

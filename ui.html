@@ -1,17 +1,48 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<!-- Standard link tag-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
+
+<h1>Form</h1>
+
+<style>
+input{
+  display: block;
+}
+body{
+  padding: 2em;
+}
+
+div{
+  margin: 1em;
+}
+</style>
+
+
+<div>
+  <label for="subject">Subject</label>
+  <input class="input__field" id="subjectField" type="text">
+
+  <label for="body">Body</label>
+  <input class="textarea" id="bodyField" type="textarea" rows="2">
+
+
+  <div>
+    <button class="button button--primary" id="submitPost">Submit</button>
+  </div>
+
+</div>
+
 <script>
+  document.getElementById('submitPost').onclick = ()=>{
+    const subjectField = document.getElementById('subjectField').value;
+    const bodyField = document.getElementById('bodyField').value
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
+    datas = {
+      subjectField,
+      bodyField,
+    }
+    parent.postMessage({pluginMessage:datas},"*");
+    
+  }
 
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
-
+  
 </script>
