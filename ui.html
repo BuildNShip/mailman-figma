@@ -18,11 +18,41 @@ div{
 
 
 <div>
-  <label for="subject">Subject</label>
+  <!-- <label for="subject">Subject</label>
   <input class="input__field" id="subjectField" type="text">
 
   <label for="body">Body</label>
-  <input class="textarea" id="bodyField" type="textarea" rows="2">
+  <input class="textarea" id="bodyField" type="textarea" rows="2"> -->
+
+  <div>
+    <label for="username">Username</label>
+    <input class="input__field" type="text" value="username" id="username">
+
+
+    <label for="name">Name</label>
+    <input class="input__field" type="text" value="display name" id="name">
+  
+    <label for="description">Description</label>
+    <input type="textarea" class="textarea" rows="2" value="your post goes here" id="description">
+
+  </div>
+
+  <div class="switch">
+    <input id="dark-mode-on" class="switch__toggle" type="checkbox">
+    <label class="switch__label" for="dark-mode-on">Dark mode</label>
+  </div>
+
+
+  <div class="radio">
+    <input id="radioButton1" type="radio" class="radio__button" name="variantGroup" value="1">
+    <label for="radioButton1" class="radio__label">No Image</label>
+
+    <input id="radioButton2" type="radio" class="radio__button" name="variantGroup" value="2">
+    <label for="radioButton2" class="radio__label">Single Image</label>
+
+    <input id="radioButton3" type="radio" class="radio__button" name="variantGroup" value="3">
+    <label for="radioButton3" class="radio__label">Carousal</label>
+  </div>
 
 
   <div>
@@ -33,13 +63,28 @@ div{
 
 <script>
   document.getElementById('submitPost').onclick = ()=>{
-    const subjectField = document.getElementById('subjectField').value;
-    const bodyField = document.getElementById('bodyField').value
+    // const subjectField = document.getElementById('subjectField').value;
+    // const bodyField = document.getElementById('bodyField').value
 
+    // datas = {
+    //   subjectField,
+    //   bodyField,
+
+    // }
+    const name = document.getElementById("name").value;
+    const username = document.getElementById("username").value;
+    const description = document.getElementById("description").value;
+    const darkModeState = document.getElementById("dark-mode-on").checked;
+    const imageVariant = document.querySelector('input[name="variantGroup"]:checked').value;
+    
     datas = {
-      subjectField,
-      bodyField,
+      name,
+      username,
+      description,
+      darkModeState,
+      imageVariant
     }
+
     parent.postMessage({pluginMessage:datas},"*");
     
   }
